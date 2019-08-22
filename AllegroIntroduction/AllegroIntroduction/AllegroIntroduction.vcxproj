@@ -69,7 +69,16 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Allegro_AddonImage>true</Allegro_AddonImage>
+    <Allegro_AddonTTF>true</Allegro_AddonTTF>
+    <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
+    <Allegro_AddonAudio>true</Allegro_AddonAudio>
+    <Allegro_AddonAcodec>true</Allegro_AddonAcodec>
+    <Allegro_AddonFont>true</Allegro_AddonFont>
+    <Allegro_AddonColor>true</Allegro_AddonColor>
+    <Allegro_LibraryType>DynamicDebug</Allegro_LibraryType>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -115,19 +124,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ex10_scaled_bitmaps.c" />
-    <ClCompile Include="ex1_display.c" />
-    <ClCompile Include="ex2_events.c" />
-    <ClCompile Include="ex3_bitmaps.c" />
-    <ClCompile Include="ex4_timers.c" />
-    <ClCompile Include="ex5_mouse.c" />
-    <ClCompile Include="ex6_keyboard.c" />
-    <ClCompile Include="ex7_fonts.c" />
-    <ClCompile Include="ex8_primitives.c" />
-    <ClCompile Include="ex9_audio.c" />
-    <ClCompile Include="example_1_display.cpp" />
+    <ClCompile Include="ex10_scaled_bitmaps.cpp" />
+    <ClCompile Include="ex1_display.cpp" />
+    <ClCompile Include="ex2_events.cpp" />
+    <ClCompile Include="ex3_bitmaps.cpp" />
+    <ClCompile Include="ex4_timers.cpp" />
+    <ClCompile Include="ex5_mouse.cpp" />
+    <ClCompile Include="ex6_keyboard.cpp" />
+    <ClCompile Include="ex7_fonts.cpp" />
+    <ClCompile Include="ex8_primitives.cpp" />
+    <ClCompile Include="ex9_audio.cpp" />
     <ClCompile Include="Source.cpp" />
-    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ex10_scaled_bitmap.h" />
@@ -141,7 +148,19 @@
     <ClInclude Include="ex8_primitives.h" />
     <ClInclude Include="ex9_audio.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\AllegroDeps.1.10.0.0\build\native\AllegroDeps.targets" Condition="Exists('..\packages\AllegroDeps.1.10.0.0\build\native\AllegroDeps.targets')" />
+    <Import Project="..\packages\Allegro.5.2.5.2\build\native\Allegro.targets" Condition="Exists('..\packages\Allegro.5.2.5.2\build\native\Allegro.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\AllegroDeps.1.10.0.0\build\native\AllegroDeps.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\AllegroDeps.1.10.0.0\build\native\AllegroDeps.targets'))" />
+    <Error Condition="!Exists('..\packages\Allegro.5.2.5.2\build\native\Allegro.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Allegro.5.2.5.2\build\native\Allegro.targets'))" />
+  </Target>
 </Project>
